@@ -27,23 +27,31 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public void calcularNombreDia() {
-        Funciones funciones = new Funciones();
+        Funciones fec = new Funciones();
 
         EditText textoDia = (EditText) findViewById(R.id.idDia);
         EditText textoMes = (EditText) findViewById(R.id.idMes);
         EditText textoAnio = (EditText) findViewById(R.id.idAnio);
 
-        boolean ingresoValido = true;
-        if(!funciones.anioCorrecto(textoAnio.getText().toString())) {
+        String anioTex = textoAnio.getText().toString();
+        String mesTex = textoMes.getText().toString();
+        String diaTex = textoDia.getText().toString();
+
+        boolean input = true;
+        if(!fec.anioCorrecto(anioTex)) {
             Toast.makeText(this, "ingrese un año correctamente", Toast.LENGTH_LONG).show();
-            ingresoValido = false;
+            input = false;
         }
-        if(!funciones.mesCorrecto(textoMes.getText().toString())) {
+        if(!fec.mesCorrecto(mesTex)) {
             Toast.makeText(this, "ingrese un mes correctamente", Toast.LENGTH_LONG).show();
-            ingresoValido = false;
+            input = false;
+        }
+        if(input && !fec.diaCorrecto(Integer.valueOf(anioTex), mesTex, Integer.valueOf(diaTex))) {
+            Toast.makeText(this, "Ingrese un dia correctamente", Toast.LENGTH_LONG).show();
+            input = false;
         }
 
-        if(ingresoValido) {
+        if(input) {
             if (Double.valueOf(textoAnio.getText().toString()) > 8899) {
                 Toast.makeText(this, "sobrepasado el rango de año", Toast.LENGTH_LONG).show();
             } else if (Double.valueOf(textoAnio.getText().toString()) < 1) {
@@ -53,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 Integer dia = Integer.parseInt(textoDia.getText().toString());
                 String mes = textoMes.getText().toString();
 
-                String resultado = funciones.calculoDeDia(anio, mes, dia);
+                String resultado = fec.calculoDeDia(anio, mes, dia);
                 final TextView textoResultado = (TextView) findViewById(R.id.idResultado);
                 textoResultado.setText(resultado);
             }

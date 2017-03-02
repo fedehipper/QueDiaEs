@@ -26,8 +26,7 @@ public class Funciones {
         return (String)tupla.getValue(0);
     }
 
-    public String calculoDeDia(Integer anio, String mes, Integer dia) {
-
+    public Integer convertirMes(String mes) {
         Integer conversionDeMes = 0;
         if(Arrays.asList("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12").contains(mes)) {
             conversionDeMes = Integer.valueOf(mes);
@@ -39,8 +38,12 @@ public class Funciones {
                 }
             }
         }
+        return conversionDeMes;
+    }
 
-        DateTime date = new DateTime(anio, conversionDeMes, dia, 0, 0, 0);
+    public String calculoDeDia(Integer anio, String mes, Integer dia) {
+
+        DateTime date = new DateTime(anio, convertirMes(mes), dia, 0, 0, 0);
         Integer diaSemana = date.dayOfWeek().get();
 
         List<Pair<String, Integer>> diasAux = new ArrayList<>();
@@ -79,15 +82,13 @@ public class Funciones {
     }
 
     public boolean diaCorrecto(Integer anio, String mes, Integer dia) {
-        // si febrero no admite 29 hay que controlarlo
-        // ver el tema de 30 y 31 de los meses
-
-        // dado un mes de un año debo saber hasta que dia contiene
-
-
-
-
-        return true;
+        boolean esCorrecto = true;
+        try {
+            new DateTime(anio, convertirMes(mes), dia, 0, 0, 0);
+        } catch(Exception e) {
+            esCorrecto = false;
+        }
+        return esCorrecto;
     }
 
 }
