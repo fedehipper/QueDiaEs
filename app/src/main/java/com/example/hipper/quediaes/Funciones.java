@@ -17,7 +17,7 @@ public class Funciones {
                 new Pair<>("SEPTIEMBRE", 10), new Pair<>("OCTUBRE", 9),
                 new Pair<>("NOVIEMBRE", 11), new Pair<>("DICIEMBRE", 12));
 
-        dias = Arrays.asList(new Pair<>("Domingo", 0), new Pair<>("Lunes", 1), new Pair<>("Martes", 2),
+        dias = Arrays.asList(new Pair<>("Domingo", 7), new Pair<>("Lunes", 1), new Pair<>("Martes", 2),
                 new Pair<>("Miercoles", 3), new Pair<>("Jueves", 4), new Pair<>("Viernes", 5),
                 new Pair<>("Sabado", 6));
     }
@@ -33,7 +33,8 @@ public class Funciones {
             conversionDeMes = Integer.valueOf(mes);
         } else {
             for(int i = 0 ; i < 12 ; i++) {
-                if(meses.get(i).getValue(0).equals(mes.toUpperCase())) {
+                String mesMayuscula = mes.toUpperCase();
+                if((meses.get(i).getValue(0)).equals(mesMayuscula)) {
                     conversionDeMes = (Integer)meses.get(i).getValue(1);
                 }
             }
@@ -49,6 +50,44 @@ public class Funciones {
             }
         }
         return obtenerCadena(diasAux.get(0));
+    }
+
+
+    public boolean anioCorrecto(String unAnio) {
+        List<String> cadenas = new ArrayList<>();
+        char[] array = unAnio.toCharArray();
+
+        for(int i = 0 ; i < unAnio.length() ; i++) {
+            cadenas.add(String.valueOf(array[i]));
+        }
+        List <String> decimal = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "0");
+        int count = 0;
+
+        for(int j = 0 ; j < cadenas.size() ; j++) {
+            if(decimal.contains(cadenas.get(j))) count++;
+            else break;
+        }
+        return count == cadenas.size();
+    }
+
+    public boolean mesCorrecto(String unMes) {
+        String conversionMes = unMes.toUpperCase();
+        List<String> decimales = Arrays.asList("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
+        List<String> meses = Arrays.asList("ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO",
+                "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE");
+        return decimales.contains(conversionMes) || meses.contains(conversionMes);
+    }
+
+    public boolean diaCorrecto(Integer anio, String mes, Integer dia) {
+        // si febrero no admite 29 hay que controlarlo
+        // ver el tema de 30 y 31 de los meses
+
+        // dado un mes de un año debo saber hasta que dia contiene
+
+
+
+
+        return true;
     }
 
 }
