@@ -26,7 +26,7 @@ public class Funciones {
         return (String)tupla.getValue(0);
     }
 
-    public Integer convertirMes(String mes) {
+    private Integer convertirMes(String mes) {
         Integer conversionDeMes = 0;
         if(Arrays.asList("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12").contains(mes)) {
             conversionDeMes = Integer.valueOf(mes);
@@ -42,7 +42,6 @@ public class Funciones {
     }
 
     public String calculoDeDia(Integer anio, String mes, Integer dia) {
-
         DateTime date = new DateTime(anio, convertirMes(mes), dia, 0, 0, 0);
         Integer diaSemana = date.dayOfWeek().get();
 
@@ -55,22 +54,24 @@ public class Funciones {
         return obtenerCadena(diasAux.get(0));
     }
 
-
-    public boolean anioCorrecto(String unAnio) {
+    private boolean esUnNumeroDecimal(String unValor) {
         List<String> cadenas = new ArrayList<>();
-        char[] array = unAnio.toCharArray();
+        char[] array = unValor.toCharArray();
 
-        for(int i = 0 ; i < unAnio.length() ; i++) {
+        for(int i = 0 ; i < unValor.length() ; i++) {
             cadenas.add(String.valueOf(array[i]));
         }
-        List <String> decimal = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "0");
+        List<String> decimal = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "0");
         int count = 0;
 
         for(int j = 0 ; j < cadenas.size() ; j++) {
-            if(decimal.contains(cadenas.get(j))) count++;
-            else break;
+            if(decimal.contains(cadenas.get(j))) count++; else break;
         }
         return count == cadenas.size();
+     }
+
+    public boolean anioCorrecto(String unAnio) {
+        return esUnNumeroDecimal(unAnio);
     }
 
     public boolean mesCorrecto(String unMes) {
@@ -81,14 +82,14 @@ public class Funciones {
         return decimales.contains(conversionMes) || meses.contains(conversionMes);
     }
 
-    public boolean diaCorrecto(Integer anio, String mes, Integer dia) {
+    public boolean diaCorrecto(Integer anio, String mes, String dia) {
         boolean esCorrecto = true;
         try {
-            new DateTime(anio, convertirMes(mes), dia, 0, 0, 0);
+            new DateTime(anio, convertirMes(mes), Integer.valueOf(dia), 0, 0, 0);
         } catch(Exception e) {
             esCorrecto = false;
         }
-        return esCorrecto;
+        return esUnNumeroDecimal(dia) && esCorrecto;
     }
 
 }

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "ingrese un mes correctamente", Toast.LENGTH_LONG).show();
             input = false;
         }
-        if(input && !fec.diaCorrecto(Integer.valueOf(anioTex), mesTex, Integer.valueOf(diaTex))) {
+        if(input && !fec.diaCorrecto(Integer.valueOf(anioTex), mesTex, diaTex)) {
             Toast.makeText(this, "Ingrese un dia correctamente", Toast.LENGTH_LONG).show();
             input = false;
         }
