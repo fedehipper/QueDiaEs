@@ -2,6 +2,7 @@ package com.example.hipper.quediaes;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.core.deps.guava.util.concurrent.ExecutionError;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Test;
@@ -24,11 +25,4 @@ public class ExampleInstrumentedTest {
         assertEquals("com.example.hipper.quediaes", appContext.getPackageName());
     }
 
-
-    @Test
-    public void testEsDecimal() {
-        Funciones funciones = new Funciones();
-        assertTrue(funciones.esUnNumeroDecimal("9"));
-        assertFalse(funciones.esUnNumeroDecimal("11"));
-    }
 }

@@ -14,4 +14,11 @@ public class ExampleUnitTest {
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
     }
+
+    @Test
+    public void testEsDecimal() {
+        Funciones funciones = new Funciones();
+        assertTrue(funciones.esUnNumeroDecimal("9"));
+        assertFalse(funciones.esUnNumeroDecimal("1f1hc"));
+    }
 }
