@@ -48,7 +48,7 @@ public class Funciones {
         return cadenaDia;
     }
 
-    private boolean esUnNumeroDecimal(String unValor) {
+    public boolean esUnNumeroDecimal(String unValor) {
         List<String> cadenas = new ArrayList<>();
         char[] array = unValor.toCharArray();
 

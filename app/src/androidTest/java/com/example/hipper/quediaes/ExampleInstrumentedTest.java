@@ -23,4 +23,12 @@ public class ExampleInstrumentedTest {
 
         assertEquals("com.example.hipper.quediaes", appContext.getPackageName());
     }
+
+
+    @Test
+    public void testEsDecimal() {
+        Funciones funciones = new Funciones();
+        assertTrue(funciones.esUnNumeroDecimal("9"));
+        assertFalse(funciones.esUnNumeroDecimal("11"));
+    }
 }
