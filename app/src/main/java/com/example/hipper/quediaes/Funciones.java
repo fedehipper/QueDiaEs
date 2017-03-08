@@ -3,39 +3,29 @@ package com.example.hipper.quediaes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.javatuples.Pair;
 import org.joda.time.DateTime;
 
 public class Funciones {
-    private List<Pair<String, Integer>> dias = new ArrayList<>();
-    private List<Pair<String,Integer>> meses = new ArrayList<>();
-
-    public Funciones() {
-        meses = Arrays.asList(new Pair<>("ENERO", 1), new Pair<>("FEBRERO", 2),
-                new Pair<>("MARZO", 3), new Pair<>("ABRIL", 4), new Pair<>("MAYO", 5),
-                new Pair<>("JUNIO", 6), new Pair<>("JULIO", 7), new Pair<>("AGOSTO", 8),
-                new Pair<>("SEPTIEMBRE", 10), new Pair<>("OCTUBRE", 9),
-                new Pair<>("NOVIEMBRE", 11), new Pair<>("DICIEMBRE", 12));
-
-        dias = Arrays.asList(new Pair<>("Domingo", 7), new Pair<>("Lunes", 1), new Pair<>("Martes", 2),
-                new Pair<>("Miercoles", 3), new Pair<>("Jueves", 4), new Pair<>("Viernes", 5),
-                new Pair<>("Sabado", 6));
-    }
-
-    private String obtenerCadena(Pair<String, Integer> tupla) {
-        return (String)tupla.getValue(0);
-    }
 
     private Integer convertirMes(String mes) {
         Integer conversionDeMes = 0;
-        if(Arrays.asList("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12").contains(mes)) {
+        if(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12").contains(mes)) {
             conversionDeMes = Integer.valueOf(mes);
         } else {
-            for(int i = 0 ; i < 12 ; i++) {
-                String mesMayuscula = mes.toUpperCase();
-                if((meses.get(i).getValue(0)).equals(mesMayuscula)) {
-                    conversionDeMes = (Integer)meses.get(i).getValue(1);
-                }
+            switch (mes.toUpperCase()) {
+                case "ENERO": conversionDeMes = 1; break;
+                case "FEBRERO": conversionDeMes = 2; break;
+                case "MARZO": conversionDeMes = 3; break;
+                case "ABRIL": conversionDeMes = 4; break;
+                case "MAYO": conversionDeMes = 5; break;
+                case "JUNIO": conversionDeMes = 6; break;
+                case "JULIO": conversionDeMes = 7; break;
+                case "AGOSTO": conversionDeMes = 8; break;
+                case "SEPTIEMBRE":
+                    case "SETIEMBRE": conversionDeMes = 9; break;
+                case "OCTUBRE": conversionDeMes = 10; break;
+                case "NOVIEMBRE": conversionDeMes = 11; break;
+                case "DICIEMBRE": conversionDeMes = 12; break;
             }
         }
         return conversionDeMes;
@@ -45,13 +35,17 @@ public class Funciones {
         DateTime date = new DateTime(anio, convertirMes(mes), dia, 0, 0, 0);
         Integer diaSemana = date.dayOfWeek().get();
 
-        List<Pair<String, Integer>> diasAux = new ArrayList<>();
-        for(int i = 0 ; i < 7 ; i++) {
-            if(dias.get(i).getValue(1) == diaSemana) {
-                diasAux.add(dias.get(i));
-            }
+        String cadenaDia = "";
+        switch (diaSemana) {
+            case 1: cadenaDia = "Lunes"; break;
+            case 2: cadenaDia = "Martes"; break;
+            case 3: cadenaDia = "Miercoles"; break;
+            case 4: cadenaDia =  "Jueves"; break;
+            case 5: cadenaDia = "Viernes"; break;
+            case 6: cadenaDia = "Sabado"; break;
+            case 7: cadenaDia = "Domingo"; break;
         }
-        return obtenerCadena(diasAux.get(0));
+        return cadenaDia;
     }
 
     private boolean esUnNumeroDecimal(String unValor) {
@@ -62,12 +56,11 @@ public class Funciones {
             cadenas.add(String.valueOf(array[i]));
         }
         List<String> decimal = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "0");
-        int count = 0;
-
-        for(int j = 0 ; j < cadenas.size() ; j++) {
-            if(decimal.contains(cadenas.get(j))) count++; else break;
+        int j;
+        for(j = 0 ; j < cadenas.size() ; j++) {
+            if(!decimal.contains(cadenas.get(j))) break;
         }
-        return count == cadenas.size();
+        return j == cadenas.size();
      }
 
     public boolean anioCorrecto(String unAnio) {
@@ -78,7 +71,7 @@ public class Funciones {
         String conversionMes = unMes.toUpperCase();
         List<String> decimales = Arrays.asList("1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
         List<String> meses = Arrays.asList("ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO",
-                "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE");
+                "SEPTIEMBRE", "SETIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE");
         return decimales.contains(conversionMes) || meses.contains(conversionMes);
     }
 
