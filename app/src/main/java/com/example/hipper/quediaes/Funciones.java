@@ -39,10 +39,10 @@ public class Funciones {
         switch (diaSemana) {
             case 1: cadenaDia = "Lunes"; break;
             case 2: cadenaDia = "Martes"; break;
-            case 3: cadenaDia = "Miercoles"; break;
+            case 3: cadenaDia = "Miércoles"; break;
             case 4: cadenaDia =  "Jueves"; break;
             case 5: cadenaDia = "Viernes"; break;
-            case 6: cadenaDia = "Sabado"; break;
+            case 6: cadenaDia = "Sábado"; break;
             case 7: cadenaDia = "Domingo"; break;
         }
         return cadenaDia;
